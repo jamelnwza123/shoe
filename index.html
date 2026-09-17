@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOLESTEP - Walk Your Own Path</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar / Header -->
+  <header class="brand-header">
+    <h1 class="brand-title">SOLESTEP</h1>
+    <p class="brand-subtitle">Urban & Trail Footwear</p>
+    <nav style="margin-top: 1rem;">
+      <a href="index.html" style="color: var(--carbon-black); font-weight: bold; margin: 0 10px; text-decoration: none;">หน้าแรก</a>
+      <a href="product.html" style="color: var(--slate-grey); margin: 0 10px; text-decoration: none;">สินค้าทั้งหมด</a>
+      <a href="admin.html" style="color: var(--slate-grey); margin: 0 10px; text-decoration: none;">ระบบจัดการ</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section style="text-align: center; padding: 3rem 1rem; background: #FFFFFF; border-radius: 12px; margin-bottom: 3rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+    <h2 style="font-size: 2.8rem; font-weight: 900; letter-spacing: 2px; color: var(--carbon-black); margin-bottom: 1rem;">WALK YOUR OWN PATH</h2>
+    <p style="font-size: 1.1rem; color: var(--muted-text); max-width: 600px; margin: 0 auto 1.5rem auto;">ก้าวไปในเส้นทางของคุณด้วยดีไซน์เรียบเท่ ทนทาน ตอบโจทย์ทุกไลฟ์สไตล์ทั้งในเมืองและสายลุยธรรมชาติ</p>
+    <a href="product.html" class="btn-add-cart" style="display: inline-block; text-decoration: none; padding: 0.8rem 2rem; font-size: 1rem;">ช้อปสินค้าทั้งหมด</a>
+  </section>
+
+  <!-- Highlight Products -->
+  <main class="product-container">
+    <h3 style="font-size: 1.5rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1.5rem; text-align: center;">สินค้าไฮไลท์</h3>
+    <div id="product-list" class="product-grid">
+      <!-- Loaded dynamically via script.js -->
+    </div>
+  </main>
+
+  <footer style="text-align: center; margin-top: 4rem; padding: 2rem 0; color: var(--muted-text); font-size: 0.85rem; border-top: 1px solid rgba(0,0,0,0.08);">
+    &copy; 2026 SOLESTEP. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

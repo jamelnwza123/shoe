@@ -1,0 +1,208 @@
+/* SOLESTEP Theme - Earth Tone & Slate Sand */
+:root {
+  /* Color Palette */
+  --bg-sand: #E8ECE9;       /* สีเบจทราย */
+  --slate-grey: #2B2D2F;    /* สีเทาหิน */
+  --olive-green: #A3B18A;   /* สีเขียวมะกอก */
+  --carbon-black: #1A1A1A;  /* สีดำคาร์บอน */
+  --card-bg: #FFFFFF;
+  --accent-gold: #D4A373;
+  --muted-text: #586069;
+  
+  /* Typography */
+  --font-street: 'Montserrat', 'Sukhumvit Set', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-street);
+  background-color: var(--bg-sand);
+  color: var(--carbon-black);
+  line-height: 1.5;
+  padding: 2rem 1rem;
+}
+
+/* Header & Title Styling */
+.brand-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.brand-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--carbon-black);
+  margin-bottom: 0.5rem;
+}
+
+.brand-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--slate-grey);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Product Container Layout */
+.product-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Grid Layout: 2x2 on Desktop, 1 Column on Mobile */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+/* Product Card Design */
+.product-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(43, 45, 47, 0.08);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Image Wrapper */
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 4:3 Aspect Ratio */
+  background-color: #F4F6F4;
+  overflow: hidden;
+}
+
+.card-image-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .card-image-wrapper img {
+  transform: scale(1.05);
+}
+
+/* Mood Badge */
+.mood-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #FFFFFF;
+  z-index: 2;
+}
+
+.mood-badge.urban {
+  background-color: var(--slate-grey);
+}
+
+.mood-badge.trail {
+  background-color: var(--olive-green);
+}
+
+.mood-badge.care {
+  background-color: var(--carbon-black);
+}
+
+/* Card Body Content */
+.card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--carbon-black);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.product-description {
+  font-size: 0.9rem;
+  color: var(--muted-text);
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+/* Card Footer & Price */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bg-sand);
+}
+
+.product-price {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--carbon-black);
+}
+
+.btn-add-cart {
+  background-color: var(--carbon-black);
+  color: var(--bg-sand);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-family: var(--font-street);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-add-cart:hover {
+  background-color: var(--slate-grey);
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+  body {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .brand-title {
+    font-size: 2rem;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .card-body {
+    padding: 1.2rem;
+  }
+}

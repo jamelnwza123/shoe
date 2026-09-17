@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOLESTEP - ยืนยันการสั่งซื้อ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .order-card {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--carbon-black);
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #CCCCCC;
+      border-radius: 6px;
+      font-family: var(--font-street);
+      font-size: 0.95rem;
+    }
+    .form-group input[readonly] {
+      background-color: var(--bg-sand);
+      color: var(--slate-grey);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="brand-header">
+    <h1 class="brand-title"><a href="index.html" style="color: inherit; text-decoration: none;">SOLESTEP</a></h1>
+    <p class="brand-subtitle">แบบฟอร์มการสั่งซื้อ</p>
+  </header>
+
+  <main class="product-container">
+    <div class="order-card">
+      <form id="orderForm">
+        <div class="form-group">
+          <label for="items">รายการสินค้าที่สั่งซื้อ</label>
+          <input type="text" id="items" name="items" readonly required placeholder="กำลังดึงข้อมูลสินค้า...">
+        </div>
+
+        <div class="form-group">
+          <label for="total">ราคารวม (บาท)</label>
+          <input type="text" id="total" name="total" readonly required placeholder="0">
+        </div>
+
+        <div class="form-group">
+          <label for="customerName">ชื่อ-นามสกุล ผู้รับ</label>
+          <input type="text" id="customerName" name="customerName" required placeholder="เช่น สมชาย ใจดี">
+        </div>
+
+        <div class="form-group">
+          <label for="contact">เบอร์โทรศัพท์ / ที่อยู่จัดส่ง</label>
+          <textarea id="contact" name="contact" rows="3" required placeholder="เบอร์โทรศัพท์ และ ที่อยู่สำหรับจัดส่งสินค้า"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="note">หมายเหตุ / ระบุไซส์รองเท้า (เช่น EU 42 หรือ US 9)</label>
+          <textarea id="note" name="note" rows="2" placeholder="ระบุไซส์รองเท้า หรือข้อความเพิ่มเติมถึงผู้ขาย"></textarea>
+        </div>
+
+        <button type="submit" class="btn-add-cart" style="width: 100%; padding: 1rem; font-size: 1rem; margin-top: 1rem;">ยืนยันสั่งซื้อ</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

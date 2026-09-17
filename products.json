@@ -1,0 +1,38 @@
+[
+  {
+    "id": "urban-white",
+    "name": "Urban Minimal Low-Cut (White Sand)",
+    "mood": "urban",
+    "type": "sneaker",
+    "price": 1890,
+    "image": "images/urban-white.jpg",
+    "description": "รองเท้าสนีกเกอร์ทรง Low-Cut สไตล์มินิมอล ดีไซน์เรียบหรู ใส่สบายได้ทุกวัน แมตช์เข้ากับทุกสไตล์การแต่งตัว"
+  },
+  {
+    "id": "urban-grey",
+    "name": "Urban Minimal High-Top (Charcoal Grey)",
+    "mood": "urban",
+    "type": "sneaker",
+    "price": 2190,
+    "image": "images/urban-grey.jpg",
+    "description": "รองเท้าหุ้มข้อ High-Top สีโทนชาร์โคล ให้ลุคสตรีทที่สุขุมและคล่องตัว ทนทานด้วยวัสดุพรีเมียม"
+  },
+  {
+    "id": "trail-olive",
+    "name": "Active Trail Outdoor (Olive Green)",
+    "mood": "trail",
+    "type": "outdoor",
+    "price": 2390,
+    "image": "images/trail-olive.jpg",
+    "description": "รองเท้าเอาท์ดอร์ลุยกิจกรรมสายลุย พื้นรองเท้ายึดเกาะพิเศษ สีเขียวมะกอกแมตช์ธรรมชาติอย่างลงตัว"
+  },
+  {
+    "id": "clean-kit",
+    "name": "Eco Clean Kit",
+    "mood": "care",
+    "type": "accessory",
+    "price": 390,
+    "image": "images/clean-kit.jpg",
+    "description": "ชุดอุปกรณ์ทำความสะอาดรองเท้าสูตรเป็นมิตรต่อสิ่งแวดล้อม ช่วยถนอมวัสดุและคืนความใหม่ให้รองเท้าคู่โปรด"
+  }
+]

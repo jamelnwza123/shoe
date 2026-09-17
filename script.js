@@ -154,7 +154,7 @@ function initOrderPage() {
         timestamp: new Date().toISOString()
       };
 
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbyPSEvTYLhlqV0_FwgAjIffIsB12DX5WErXGFBO3nZy_vLG4_IttML1zYnrplUYH9Re/exec';
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbxnmi8_pslLiyW4Tsim6qLnb1QL8U4UH8w98waCMyQItpjeaSAYXvuvXL9EoDE7FhSo/exec';
 
       // Send POST request
       fetch(scriptUrl, {
@@ -191,7 +191,7 @@ function initAdminPage() {
   const ordersTable = document.getElementById('ordersTable');
   if (!ordersTable) return;
 
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRCWvwRxVIJWdG2QO7mQD-fBDzQ6l4AfhdYzGGmCIBw-78UrYpUUE3WHMPWtNSoKuiEWM9Q-neonNWi/pub?gid=0&single=true&output=csv';
+  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRCWvwRxVIJWdG2QO7mQD-fBDzQ6l4AfhdYzGGmCIBw-78UrYpUUE3WHMPWtNSoKuiEWM9Q-neonNWi/pubhtml';
 
   fetch(csvUrl)
     .then(response => {

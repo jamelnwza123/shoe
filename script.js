@@ -2,139 +2,11 @@
 // SOLESTEP - Main JavaScript File
 // ==========================================
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Determine current page based on element existence
-  if (document.getElementById('product-list')) {
-    initProductPage();
-  }
-  
-  if (document.getElementById('orderForm')) {
-    initOrderPage();
-  }
-  
-  if (document.getElementById('ordersTable')) {
-    initAdminPage();
-  }
-});
-
 // ------------------------------------------
-// 1. PRODUCT PAGE (product.html)
+// ตั้งค่า Telegram Bot
 // ------------------------------------------
-function initProductPage() {
-  const productList = document.getElementById('product-list');
-  const filterBar = document.getElementById('filter-bar');
-  let allProducts = [];
-
-  // Fetch products from products.json
-  fetch('products.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      allProducts = data;
-      renderFilterBar();
-      renderProducts(allProducts);
-    })
-    .catch(error => {
-      console.error('Error loading products:', error);
-      productList.innerHTML = '<p class="error-message">ไม่สามารถโหลดข้อมูลสินค้าได้ กรุณาลองใหม่อีกครั้ง</p>';
-    });
-
-  // Render Filter Buttons dynamically
-  function renderFilterBar() {
-    if (!filterBar) return;
-    
-    const categories = [
-      { id: 'all', name: 'ทั้งหมด' },
-      { id: 'urban', name: 'Urban' },
-      { id: 'trail', name: 'Trail' },
-      { id: 'care', name: 'Care' }
-    ];
-
-    filterBar.innerHTML = categories.map(cat => `
-      <button class="filter-btn ${cat.id === 'all' ? 'active' : ''}" data-filter="${cat.id}">
-        ${cat.name}
-      </button>
-    `).join('');
-
-    // Event listener for filtering
-    filterBar.addEventListener('click', (e) => {
-      if (!e.target.classList.contains('filter-btn')) return;
-
-      // Toggle active class
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      e.target.classList.add('active');
-
-      const filterValue = e.target.getAttribute('data-filter');
-      if (filterValue === 'all') {
-        renderProducts(allProducts);
-      } else {
-        const filtered = allProducts.filter(item => item.mood && item.mood.toLowerCase() === filterValue.toLowerCase());
-        renderProducts(filtered);
-      }
-    });
-  }
-
-  // Render Product Cards to #product-list
-  function renderProducts(products) {
-    if (!productList) return;
-
-    if (products.length === 0) {
-      productList.innerHTML = '<p class="no-products">ไม่พบสินค้าในหมวดหมู่นี้</p>';
-      return;
-    }
-
-    productList.innerHTML = products.map(product => {
-      // 2. URL parameter redirection for purchasing
-      const orderUrl = `order.html?item=${encodeURIComponent(product.name)}&price=${encodeURIComponent(product.price)}`;
-      
-      return `
-        <div class="product-card">
-          <div class="card-image-wrapper">
-            <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=SOLESTEP'">
-            <span class="mood-badge ${product.mood ? product.mood.toLowerCase() : ''}">${product.mood || 'SOLES'}</span>
-          </div>
-          <div class="card-body">
-            <h3 class="product-name">${product.name}</h3>
-            <p class="product-description">${product.description || ''}</p>
-            <div class="card-footer">
-              <span class="product-price">฿${Number(product.price).toLocaleString()}</span>
-              <a href="${orderUrl}" class="btn-add-cart">สั่งซื้อ</a>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-}
-
-// ------------------------------------------
-// 2. & 3. & 4. ORDER PAGE (order.html)
-// ------------------------------------------
-function initOrderPage() {
-  const orderForm = document.getElementById('orderForm');
-  const customerNameInput = document.getElementById('customerName');
-  const contactInput = document.getElementById('contact');
-  const itemsInput = document.getElementById('items');
-  const totalInput = document.getElementById('total');
-  const noteInput = document.getElementById('note');
-
-  // 3. Read URL Parameters and Auto-fill #items and #total
-  const urlParams = new URLSearchParams(window.location.search);
-  const itemParam = urlParams.get('item');
-  const priceParam = urlParams.get('price');
-
-  if (itemsInput && itemParam) {
-    itemsInput.value = itemParam;
-  }
-  if (totalInput && priceParam) {
-    totalInput.value = priceParam;
-  }
-
-  // 4. Handle Order Submission (POST JSON to Google Apps Script)
+const TELEGRAM_BOT_TOKEN = '8727544403:AAG9TIR9D9KhKIoHJNEo8zOtI_6xY8y8enY';
+const TELEGRAM_CHAT_ID = '@jame125';
   if (orderForm) {
     orderForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -156,19 +28,43 @@ function initOrderPage() {
 
       const scriptUrl = 'https://script.google.com/macros/s/AKfycbxnmi8_pslLiyW4Tsim6qLnb1QL8U4UH8w98waCMyQItpjeaSAYXvuvXL9EoDE7FhSo/exec';
 
-      // Send POST request
-      fetch(scriptUrl, {
-        method: 'POST',
-        mode: 'no-cors', // standard for Google Apps Script web app endpoint cross-origin submissions
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
+      // ----------------------------------------------------
+      // สร้าง Payload และข้อความสำหรับแจ้งเตือนเข้า Telegram
+      // ----------------------------------------------------
+      const telegramMessage = `👟 <b>มีคำสั่งซื้อใหม่! (SOLESTEP)</b>\n\n` +
+                              `👤 <b>ชื่อลูกค้า:</b> ${payload.customerName}\n` +
+                              `📞 <b>ติดต่อ:</b> ${payload.contact}\n` +
+                              `🛍️ <b>สินค้า:</b> ${payload.items}\n` +
+                              `💰 <b>ยอดรวม:</b> ฿${payload.total}\n` +
+                              `📝 <b>หมายเหตุ:</b> ${payload.note || '-'}`;
+
+      const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+      const telegramPayload = {
+        chat_id: TELEGRAM_CHAT_ID,
+        text: telegramMessage,
+        parse_mode: 'HTML'
+      };
+
+      // ใช้ Promise.all เพื่อยิงข้อมูลไปที่ Google Sheets และ Telegram พร้อมๆ กัน
+      Promise.all([
+        fetch(scriptUrl, {
+          method: 'POST',
+          mode: 'no-cors', // standard for Google Apps Script web app endpoint cross-origin submissions
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        }),
+        fetch(telegramApiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(telegramPayload)
+        })
+      ])
       .then(() => {
         alert('บันทึกการสั่งซื้อเรียบร้อยแล้ว! ขอบคุณที่ไว้วางใจ SOLESTEP');
         orderForm.reset();
-        window.location.href = 'product.html';
+        window.location.href = 'product.html'; // หากมีหน้า thankyou.html แนะนำให้เปลี่ยนให้ไปหน้านั้นแทน
       })
       .catch(error => {
         console.error('Error submitting order:', error);
@@ -191,7 +87,9 @@ function initAdminPage() {
   const ordersTable = document.getElementById('ordersTable');
   if (!ordersTable) return;
 
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRCWvwRxVIJWdG2QO7mQD-fBDzQ6l4AfhdYzGGmCIBw-78UrYpUUE3WHMPWtNSoKuiEWM9Q-neonNWi/pubhtml';
+  // แนะนำให้แก้ไขลิงก์ลงท้ายจาก /pubhtml เป็น /pub?output=csv เพื่อให้ดึงข้อมูล CSV ได้ถูกต้อง
+  const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRCWvwRxVIJWdG2QO7mQD-fBDzQ6l4AfhdYzGGmCIBw-78UrYpUUE3WHMPWtNSoKuiEWM9Q-neonNWi/pub?output=csv';
+
 
   fetch(csvUrl)
     .then(response => {
@@ -216,7 +114,7 @@ function initAdminPage() {
       const result = [];
       let current = '';
       let inQuotes = false;
-      
+     
       for (let i = 0; i < line.length; i++) {
         const char = line[i];
         if (char === '"') {
@@ -242,6 +140,10 @@ function initAdminPage() {
 
     const headerRow = rows[0];
     const dataRows = rows.slice(1);
+   
+    // เรียงให้รายการล่าสุดขึ้นก่อน (Optional)
+    dataRows.reverse();
+
 
     let html = '<thead><tr>';
     headerRow.forEach(header => {
